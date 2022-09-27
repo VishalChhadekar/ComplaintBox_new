@@ -51,6 +51,7 @@ public class WebSecutiryConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/manager/**").hasAnyAuthority("MANAGER", "ADMIN")
 		.antMatchers("/admin/**").hasAuthority("ADMIN")
 		.antMatchers("/authenticate").permitAll()
+		.antMatchers("/register").permitAll()
 		.anyRequest()
         .authenticated()
         .and()
@@ -64,6 +65,9 @@ public class WebSecutiryConfig extends WebSecurityConfigurerAdapter {
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 	    return super.authenticationManagerBean();
 	}
-
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+	    return new BCryptPasswordEncoder();
+	}
 
 }

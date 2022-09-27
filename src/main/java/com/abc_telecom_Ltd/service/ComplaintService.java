@@ -11,13 +11,13 @@ public interface ComplaintService {
 
 	Complaint raiseComplaint(Complaint complaint);
 
-	Complaint viewComplaint(Long cust_id);
+	Complaint viewComplaint(Long cust_id) throws Exception;
 
-	void provideFeedback(FeedbackModel feedback, Long cust_id);
+	void provideFeedback(FeedbackModel feedback, Long cust_id) throws Exception;
 
 	List<Complaint> viewComplaints(Long pin_code);
 
-	void assignEngineer(AssingEngineerToComplaintModel assing);
+	void assignEngineer(AssingEngineerToComplaintModel assing) throws Exception;
 
 	List<Complaint> viewAllComplaints(Long eng_id);
 

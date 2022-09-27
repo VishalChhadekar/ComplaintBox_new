@@ -6,36 +6,27 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abc_telecom_Ltd.model.JWTRequest;
 import com.abc_telecom_Ltd.model.JWTResponse;
 import com.abc_telecom_Ltd.utility.JWTUtility;
 
-
-
-
 @RestController
 
 public class LoginController {
-	
+
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	@Autowired
 	private UserDetailsService userDetailsService;
-	
+
 	@Autowired
 	private JWTUtility jwtUtility;
-	
-	@GetMapping("/")
-	public String home() {
-		return "Home page of login controller";
-	}
-	
+
+
 	@PostMapping("/authenticate")
 	public JWTResponse authenticate(@RequestBody JWTRequest jwtRequest) throws Exception {
 		// using try catch: if authentication fails throw exception

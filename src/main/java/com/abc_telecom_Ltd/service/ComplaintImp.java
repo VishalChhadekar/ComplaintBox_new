@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.abc_telecom_Ltd.entity.Complaint;
 import com.abc_telecom_Ltd.entity.Customer;
+import com.abc_telecom_Ltd.exceptions.ComplaintNotPresentException;
 import com.abc_telecom_Ltd.model.AssingEngineerToComplaintModel;
 import com.abc_telecom_Ltd.model.FeedbackModel;
 import com.abc_telecom_Ltd.model.UpdateStatusModel;
@@ -32,12 +33,16 @@ public class ComplaintImp implements ComplaintService {
 	}
 
 	@Override
-	public Complaint viewComplaint(Long cust_id) {
-		return complaintRepository.findByCustomer(cust_id);
+	public Complaint viewComplaint(Long cust_id) throws Exception {
+		Complaint complaint = complaintRepository.findByCustomer(cust_id);
+		if(Objects.isNull(complaint)) {
+			throw new ComplaintNotPresentException();
+		}
+		return complaint;
 	}
 
 	@Override
-	public void provideFeedback(FeedbackModel feedback, Long cust_id) {
+	public void provideFeedback(FeedbackModel feedback, Long cust_id) throws Exception {
 		// get complaint from DB byCustomerId
 		Complaint complaint = complaintRepository.findByCustomer(cust_id);
 		if (Objects.nonNull(complaint)) {
@@ -45,7 +50,7 @@ public class ComplaintImp implements ComplaintService {
 			complaint.setFeedback(feedback.getFeedback());
 			complaintRepository.save(complaint);
 		} else {
-			throw new NullPointerException("Complaint does not exist for this customer.");
+			throw new ComplaintNotPresentException();
 		}
 	}
 
@@ -55,9 +60,12 @@ public class ComplaintImp implements ComplaintService {
 	}
 
 	@Override
-	public void assignEngineer(AssingEngineerToComplaintModel assing) {
+	public void assignEngineer(AssingEngineerToComplaintModel assing) throws Exception {
 		//get complaint from DB
 		Complaint complaint = complaintRepository.findById(assing.getComplaintId()).get();
+		if(Objects.isNull(complaint)) {
+			throw new ComplaintNotPresentException();
+		}
 		//Assign Engineer only if, status is raised
 		if(complaint.getStatus().equalsIgnoreCase("Raised")) {	
 			complaint.setEngineer(assing.getEngineerId());

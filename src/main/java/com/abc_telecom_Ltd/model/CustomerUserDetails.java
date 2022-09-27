@@ -28,7 +28,7 @@ public class CustomerUserDetails implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		System.out.println("Current User Role: "+ user.getRole());
+		System.out.println("Current AppUser Role: "+ user.getRole());
 		return Collections.singleton(new SimpleGrantedAuthority(user.getRole()));
 	}
 

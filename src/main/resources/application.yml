@@ -10,4 +10,5 @@ spring:
     defer-datasource-initialization: true
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: true 
+#   show-sql: true //only for development mode: must be false on production mode

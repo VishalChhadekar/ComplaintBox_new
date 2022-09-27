@@ -22,7 +22,7 @@ public class AppUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		AppUser user = appUserDetailRepository.findByUsername(username);
 		if (user == null) {
-			throw new UsernameNotFoundException("User Not Found");
+			throw new UsernameNotFoundException("AppUser Not Found");
 		}
 		/*
 		we must return the object of UserDetails: since it is an interface, thus we have to create 

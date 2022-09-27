@@ -1,6 +1,6 @@
 package com.abc_telecom_Ltd.controller;
-	
 
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,43 +13,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abc_telecom_Ltd.entity.Complaint;
+import com.abc_telecom_Ltd.exceptions.ComplaintNotPresentException;
 import com.abc_telecom_Ltd.model.FeedbackModel;
 import com.abc_telecom_Ltd.service.ComplaintService;
-
 
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
-	
+
 	@Autowired
 	private ComplaintService complaintService;
+
+	// LOGIN
+
+	// RAISE COMPLAINT
 	
-	//LOGIN
-	
-	//RAISE COMPLAINT
 	@PostMapping("/raiseComplaint")
-	public ResponseEntity<Complaint> raiseComplaint(@RequestBody Complaint complaint ){
+	public ResponseEntity<Complaint> raiseComplaint(@RequestBody Complaint complaint) {
 		Complaint complaint2 = complaintService.raiseComplaint(complaint);
-		//Customer_id, complaint, pin code, contact are required to raise complaint
-		//Engineer, Feedback can be set 'NA' from UI side. 
+		// Customer_id, complaint, pin code, contact are required to raise complaint
+		// Engineer, Feedback can be set 'NA' from UI side.
 		return new ResponseEntity<Complaint>(complaint2, HttpStatus.OK);
 	}
+
+	// VIEW COMPLAINT
 	
-	
-	//VIEW COMPLAINT
 	@GetMapping("/viewComplaint/{cust_id}")
-	public ResponseEntity<Complaint> viewComplaint(@PathVariable Long cust_id){
+	public ResponseEntity<Complaint> viewComplaint(@PathVariable Long cust_id) throws Exception {
 		Complaint complaint = complaintService.viewComplaint(cust_id);
+		if (Objects.isNull(complaint)) {
+			throw new ComplaintNotPresentException();
+		}
 		return new ResponseEntity<Complaint>(complaint, HttpStatus.OK);
 	}
-	
 
-	//PROVIDE FEEDBACK
+	// PROVIDE FEEDBACK
+	
 	@PostMapping("/addFeedback/{cust_id}")
-	public String provideFeedback(@RequestBody FeedbackModel feedback, @PathVariable Long cust_id) {
+	public String provideFeedback(@RequestBody FeedbackModel feedback, @PathVariable Long cust_id) throws Exception {
 		complaintService.provideFeedback(feedback, cust_id);
 		return "Feedback addedd";
 	}
-	
 
 }
