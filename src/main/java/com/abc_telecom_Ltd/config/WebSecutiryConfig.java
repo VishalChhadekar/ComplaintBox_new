@@ -44,6 +44,7 @@ public class WebSecutiryConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.csrf().disable()
+		.cors().disable()
 		.authorizeRequests()
 		.antMatchers("/").permitAll()
 		.antMatchers("/customer/**").hasAnyAuthority("CUSTOMER", "ADMIN")
@@ -52,6 +53,13 @@ public class WebSecutiryConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/admin/**").hasAuthority("ADMIN")
 		.antMatchers("/authenticate").permitAll()
 		.antMatchers("/register").permitAll()
+		 .antMatchers("/v2/api-docs",
+                 "/configuration/ui",
+                 "/swagger-resources/**",
+                 "/configuration/security",
+                 "/swagger-ui.html",
+                 "/webjars/**")
+         .permitAll()
 		.anyRequest()
         .authenticated()
         .and()
@@ -69,5 +77,6 @@ public class WebSecutiryConfig extends WebSecurityConfigurerAdapter {
 	public BCryptPasswordEncoder passwordEncoder() {
 	    return new BCryptPasswordEncoder();
 	}
+
 
 }

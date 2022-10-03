@@ -1,5 +1,6 @@
 package com.abc_telecom_Ltd.exceptions;
 
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.NoSuchElementException;
 
@@ -69,6 +70,12 @@ public class RestResponseEntityExceptionalHandler extends ResponseEntityExceptio
 
 	@ExceptionHandler(IdentifierGenerationException.class)
 	public ErrorMessage identifierGenerationException(Exception exception, Model model, WebRequest request) {
+		ErrorMessage message = new ErrorMessage(HttpStatus.BAD_REQUEST, exception.getMessage());
+		model.addAttribute("errormessage", message);
+		return message;
+	}
+	@ExceptionHandler(SQLException.class)
+	public ErrorMessage sQLException(Exception exception, Model model, WebRequest request) {
 		ErrorMessage message = new ErrorMessage(HttpStatus.BAD_REQUEST, exception.getMessage());
 		model.addAttribute("errormessage", message);
 		return message;

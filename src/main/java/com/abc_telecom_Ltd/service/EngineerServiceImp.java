@@ -24,10 +24,14 @@ public class EngineerServiceImp implements EngineerService{
 		engineerRepository.deleteById(id);
 		
 	}
+	@Override
+	public List<Engineer> viewEngineersForAdmin() {
+		return engineerRepository.findAll();
+	}
 
 	@Override
-	public List<Engineer> viewEngineers() {
-		return engineerRepository.findAll();
+	public List<Engineer> viewEngineers(String pin_code) {
+		return engineerRepository.findByPinCode(pin_code);
 	}
 
 

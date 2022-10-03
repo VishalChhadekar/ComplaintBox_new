@@ -12,8 +12,14 @@ public interface ComplaintRepository extends JpaRepository<Complaint, Long>{
 
 	Complaint findByCustomer(Long cust_id);
 
-	List<Complaint> findAllByPinCode(Long pin_code);
+	List<Complaint> findAllByPinCode(String pin_code);
 
 	List<Complaint> findByEngineer(Long eng_id);
+
+	Complaint findByCustomerCustid(Long cust_id);
+
+	Complaint findByCustomer_Custid(Long cust_id);
+
+	
 
 }

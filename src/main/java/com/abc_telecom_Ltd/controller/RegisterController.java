@@ -24,7 +24,9 @@ public class RegisterController {
 	public ResponseEntity<AppUser> registerAppUser(@RequestBody AppUser appUser){
 		AppUser user = 	new AppUser();
 		user.setUsername(appUser.getPassword());
-		user.setPassword(eBCryptPasswordEncoder.encode(appUser.getPassword()));
+		String password = eBCryptPasswordEncoder.encode(appUser.getPassword());
+		System.err.println("Password: "+ password);
+		user.setPassword(password);
 		user.setRole(appUser.getRole());
 		AppUser savedUser = aUserDetailRepository.save(appUser);
 		return new ResponseEntity<AppUser>(savedUser, HttpStatus.OK);

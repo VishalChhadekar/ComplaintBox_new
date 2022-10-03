@@ -18,10 +18,11 @@ public class Customer {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long Cust_id;
+	private Long custid;
 	private String name;
+	private String userName;
 	private String address;
+	private String pinCode;
 	private Long contact;
 	private String ticket;
-
 }

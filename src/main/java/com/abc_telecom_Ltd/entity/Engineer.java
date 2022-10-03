@@ -18,6 +18,6 @@ public class Engineer {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long engineer_id;
 	private String name;
-
+	private String pinCode;
 
 }

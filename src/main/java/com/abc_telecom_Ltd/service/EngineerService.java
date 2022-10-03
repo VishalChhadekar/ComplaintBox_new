@@ -10,6 +10,8 @@ public interface EngineerService {
 
 	void deleteEngineer(Long id);
 
-	List<Engineer> viewEngineers();
+	List<Engineer> viewEngineers(String pin_code);
+
+	List<Engineer> viewEngineersForAdmin();
 
 }
