@@ -47,21 +47,21 @@ public class WebSecutiryConfig extends WebSecurityConfigurerAdapter {
 		.cors().disable()
 		.authorizeRequests()
 		.antMatchers("/").permitAll()
-		.antMatchers("/customer/**").hasAnyAuthority("CUSTOMER", "ADMIN")
-		.antMatchers("/engineer/**").hasAnyAuthority("ENGINEER", "ADMIN")
-		.antMatchers("/manager/**").hasAnyAuthority("MANAGER", "ADMIN")
-		.antMatchers("/admin/**").hasAuthority("ADMIN")
-		.antMatchers("/authenticate").permitAll()
-		.antMatchers("/register").permitAll()
-		 .antMatchers("/v2/api-docs",
-                 "/configuration/ui",
-                 "/swagger-resources/**",
-                 "/configuration/security",
-                 "/swagger-ui.html",
-                 "/webjars/**")
-         .permitAll()
-		.anyRequest()
-        .authenticated()
+//		.antMatchers("/customer/**").hasAnyAuthority("CUSTOMER", "ADMIN")
+//		.antMatchers("/engineer/**").hasAnyAuthority("ENGINEER", "ADMIN")
+//		.antMatchers("/manager/**").hasAnyAuthority("MANAGER", "ADMIN")
+//		.antMatchers("/admin/**").hasAuthority("ADMIN")
+//		.antMatchers("/authenticate").permitAll()
+//		.antMatchers("/register").permitAll()
+//		 .antMatchers("/v2/api-docs",
+//                 "/configuration/ui",
+//                 "/swagger-resources/**",
+//                 "/configuration/security",
+//                 "/swagger-ui.html",
+//                 "/webjars/**")
+//         .permitAll()
+//		.anyRequest()
+//        .authenticated()
         .and()
         .sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

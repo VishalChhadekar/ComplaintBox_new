@@ -12,8 +12,10 @@
 	<groupId>Complaint_Box</groupId>
 	<artifactId>Complaint_Box</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Kitchen_Story-1</name>
-	<description>An E-Comerse For Food Items </description>
+	<name>Complaint Box</name>
+	<description>Complaint Redressal Application</description>
+	<packaging>war</packaging>
+	
 	<properties>
 		<java.version>17</java.version>
 	</properties>
