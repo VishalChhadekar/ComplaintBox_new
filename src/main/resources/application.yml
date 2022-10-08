@@ -6,13 +6,13 @@ spring:
       matching-strategy: ANT_PATH_MATCHER
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    password: Lucifer@23
     url: jdbc:mysql://docker-mysql:3306/Complaint_Box
-    username: root
+    username: vishalchhadekar
+    password: Vishal@1998
   jpa:
     defer-datasource-initialization: true
     hibernate:
-      dialect: org.hibernate.dialect.MySQLDialect
+      dialect: org.hibernate.dialect.MySQL8Dialect
       ddl-auto: update
     show-sql: true 
 #   show-sql: true //only for development mode: must be false on production mode
